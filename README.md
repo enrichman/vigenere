@@ -1,6 +1,68 @@
 # Vigenere
 
-// in progress
+Simple implementation of the Vigenere cipher, with the possibility of adding a random salt to encrypt the same plaintext with the same key in a different way.
+
+By default it uses only the basic alphabet (numbers [0-9] and normal chars, upper and lower case [a-z,A-Z]).
+Every other character won't be encrypted, but you can provide your char[] alphabet.
+
+Example:
+
+```
+String key = "MyPrivateKey";
+String plaintext = "Hello";
+
+Vigenere vigenere = new Vigenere();
+String encrypted = vigenere.encrypt(plaintext, key);
+String decrypted = vigenere.decrypt(encrypted, key);
+
+// the encrypted text will be always the same -> "dcAcW"
+```
+
+If you want to randomize a bit more the encrypted text, specify a number of character to create a random string that will be used to create a salt.
+This salt will be used to encrypt the plaintext and then appended to the encrypted text.
+Then the encrypted text will be encrypted again with the secret key.
+
+```
+String key = "MyPrivateKey";
+String plaintext = "Hello";
+
+Vigenere vigenere = new Vigenere();
+String encrypted1 = vigenere.encrypt(plaintext, key, 3);
+String encrypted2 = vigenere.encrypt(plaintext, key, 3);
+
+String decrypted1 = vigenere.decrypt(encrypted1, key, 3);
+String decrypted2 = vigenere.decrypt(encrypted2, key, 3);
+
+// the encrypted texts will be different
+// encrypted1 -> "NwE9KVMf"
+// encrypted2 -> "5AjrY04t"
+```
+
+As stated above the cipher is going to use a simple alphabet, but you can provide a different one if needed.
+The Alphabet class provides the three different charset used and a utility method to merge them.
+You can use just one of it, mix two of them or merge other custom charsets.
+
+As you can see the `Alphabet.DEFAULT` is just a merge of the three:
+
+```
+public static char[] DEFAULT = Alphabet.merge(
+    Alphabet.NUMERIC,
+    Alphabet.UPPER_CASE,
+    Alphabet.LOWER_CASE
+);
+```
+
+You can so create a Vigenere class providing your own alphabet, or extend the default one.
+
+```
+char[] punctuation = new char[] { ',', '.' };
+char[] extendedAlphabet = Alphabet.merge(Alphabet.DEFAULT, punctuation);
+
+Vigenere vigenere = new Vigenere(extendedAlphabet);
+```
+
+Remember to provide the same alphabet, key and salt size to correctly encrypt/decrypt the text.
+
 
 Developed By
 --------
