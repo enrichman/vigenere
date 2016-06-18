@@ -11,26 +11,20 @@ public class Vigenere {
 
     private static Random rand = new Random();
     private char[] alphabet;
-    private int saltSize;
 
     public Vigenere() {
         this(Alphabet.DEFAULT);
     }
 
-    public Vigenere(int saltSize) {
-        this(Alphabet.DEFAULT, saltSize);
-    }
-
     public Vigenere(char[] alphabet) {
-        this(alphabet, 0);
-    }
-
-    public Vigenere(char[] alphabet, int saltSize) {
         this.alphabet = Alphabet.clean(alphabet);
-        this.saltSize = saltSize;
     }
 
     public String encrypt(String plaintext, String key) {
+        return encrypt(plaintext, key, 0);
+    }
+
+    public String encrypt(String plaintext, String key, int saltSize) {
 
         if(saltSize > 0) {
             StringBuilder sb = new StringBuilder();
@@ -47,6 +41,10 @@ public class Vigenere {
     }
 
     public String decrypt(String encrypted, String key) {
+        return decrypt(encrypted, key, 0);
+    }
+
+    public String decrypt(String encrypted, String key, int saltSize) {
         String decrypted = shift(encrypted, key, true);
 
         if(saltSize > 0) {
