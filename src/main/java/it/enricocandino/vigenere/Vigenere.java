@@ -108,6 +108,9 @@ public class Vigenere {
     }
 
     private String validateKey(String originalKey) {
+        if(originalKey == null)
+            return "";
+
         StringBuilder sb = new StringBuilder();
         for(char c : originalKey.toCharArray()) {
             if(indexOf(c) > -1)

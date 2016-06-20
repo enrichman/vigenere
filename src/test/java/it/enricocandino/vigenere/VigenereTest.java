@@ -97,4 +97,16 @@ public class VigenereTest extends TestCase {
         assertEquals(plaintext, decrypted);
     }
 
+    public void testEncryptDecryptWithNullKey() {
+        String plaintext = "HELLO";
+
+        Vigenere vigenere = new Vigenere(Alphabet.NUMERIC, Alphabet.UPPER_CASE);
+
+        String encrypted = vigenere.encrypt(plaintext, null);
+        String decrypted = vigenere.decrypt(encrypted, null);
+
+        assertEquals(plaintext, encrypted);
+        assertEquals(plaintext, decrypted);
+    }
+
 }
