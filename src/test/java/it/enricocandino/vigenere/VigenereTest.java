@@ -121,4 +121,13 @@ public class VigenereTest extends TestCase {
         assertEquals("", decrypted);
     }
 
+    public void testShortDecrypt() {
+        String key = "KLMMSL";
+
+        Vigenere vigenere = new Vigenere(Alphabet.NUMERIC, Alphabet.UPPER_CASE);
+        String decrypted = vigenere.decrypt("A", key, 3);
+
+        assertEquals("", decrypted);
+    }
+
 }
