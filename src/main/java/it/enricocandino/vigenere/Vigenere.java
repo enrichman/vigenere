@@ -20,6 +20,10 @@ public class Vigenere {
         this.alphabet = Alphabet.clean(alphabet);
     }
 
+    public Vigenere(char[]... alphabets) {
+        this(Alphabet.merge(alphabets));
+    }
+
     public String encrypt(String plaintext, String key) {
         return encrypt(plaintext, key, 0);
     }

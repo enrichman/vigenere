@@ -62,9 +62,7 @@ public class VigenereTest extends TestCase {
         String plaintext = "Hello...";
 
         char[] punctuation = new char[] { ',', '.' };
-        char[] extendedAlphabet = Alphabet.merge(Alphabet.DEFAULT, punctuation);
-
-        Vigenere vigenere = new Vigenere(extendedAlphabet);
+        Vigenere vigenere = new Vigenere(Alphabet.DEFAULT, punctuation);
 
         String encrypted = vigenere.encrypt(plaintext, key);
         String decrypted = vigenere.decrypt(encrypted, key);

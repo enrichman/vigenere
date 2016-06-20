@@ -39,6 +39,15 @@ String decrypted2 = vigenere.decrypt(encrypted2, key, 3);
 ```
 
 As stated above the cipher is going to use a simple alphabet, but you can provide a different one if needed.
+You can so create a Vigenere class providing your own alphabet, or extending the default one.
+
+```
+char[] punctuation = new char[] { ',', '.' };
+Vigenere vigenere = new Vigenere(Alphabet.DEFAULT, punctuation);
+```
+
+Remember to provide the same alphabet, key and salt size to correctly encrypt/decrypt the text.
+
 The Alphabet class provides the three different charset used and a utility method to merge them.
 You can use just one of it, mix two of them or merge other custom charsets.
 
@@ -51,17 +60,6 @@ public static char[] DEFAULT = Alphabet.merge(
     Alphabet.LOWER_CASE
 );
 ```
-
-You can so create a Vigenere class providing your own alphabet, or extend the default one.
-
-```
-char[] punctuation = new char[] { ',', '.' };
-char[] extendedAlphabet = Alphabet.merge(Alphabet.DEFAULT, punctuation);
-
-Vigenere vigenere = new Vigenere(extendedAlphabet);
-```
-
-Remember to provide the same alphabet, key and salt size to correctly encrypt/decrypt the text.
 
 
 Developed By
