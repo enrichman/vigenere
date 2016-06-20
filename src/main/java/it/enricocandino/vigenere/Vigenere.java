@@ -1,5 +1,8 @@
 package it.enricocandino.vigenere;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Random;
 
 /**
@@ -8,6 +11,8 @@ import java.util.Random;
  * Distributed under the MIT License.
  */
 public class Vigenere {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Vigenere.class);
 
     private static Random rand = new Random();
     private char[] alphabet;
@@ -31,6 +36,10 @@ public class Vigenere {
     public String encrypt(String plaintext, String key, int saltSize) {
         String validKey = validateKey(key);
 
+        if(plaintext == null || plaintext.length() == 0 || validKey.length() == 0) {
+            return "";
+        }
+
         if(saltSize > 0) {
             StringBuilder sb = new StringBuilder();
             for(int i=0; i<saltSize; i++) {
@@ -51,6 +60,10 @@ public class Vigenere {
 
     public String decrypt(String encrypted, String key, int saltSize) {
         String validKey = validateKey(key);
+
+        if(encrypted == null || encrypted.length() == 0 || validKey.length() == 0) {
+            return "";
+        }
 
         String decrypted = shift(encrypted, validKey, true);
 

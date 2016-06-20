@@ -2,6 +2,9 @@ package it.enricocandino.vigenere;
 
 import junit.framework.TestCase;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Copyright (c) 2016 Enrico Candino
  * <p>
@@ -107,6 +110,15 @@ public class VigenereTest extends TestCase {
 
         assertEquals(plaintext, encrypted);
         assertEquals(plaintext, decrypted);
+    }
+
+    public void testEmptyDecrypt() {
+        String key = "KLMMSL";
+
+        Vigenere vigenere = new Vigenere(Alphabet.NUMERIC, Alphabet.UPPER_CASE);
+        String decrypted = vigenere.decrypt("", key, 3);
+
+        assertEquals("", decrypted);
     }
 
 }
