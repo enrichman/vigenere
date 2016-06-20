@@ -29,6 +29,7 @@ public class Vigenere {
     }
 
     public String encrypt(String plaintext, String key, int saltSize) {
+        String validKey = validateKey(key);
 
         if(saltSize > 0) {
             StringBuilder sb = new StringBuilder();
@@ -41,7 +42,7 @@ public class Vigenere {
             plaintext = initVector + firstPass;
         }
 
-        return shift(plaintext, key, false);
+        return shift(plaintext, validKey, false);
     }
 
     public String decrypt(String encrypted, String key) {
@@ -49,7 +50,9 @@ public class Vigenere {
     }
 
     public String decrypt(String encrypted, String key, int saltSize) {
-        String decrypted = shift(encrypted, key, true);
+        String validKey = validateKey(key);
+
+        String decrypted = shift(encrypted, validKey, true);
 
         if(saltSize > 0) {
             String salt = decrypted.substring(0, saltSize);
@@ -61,6 +64,9 @@ public class Vigenere {
     }
 
     private String shift(String clear, String shifter, boolean backward) {
+
+        if(shifter.length() == 0)
+            return clear;
 
         while (shifter.length() < clear.length())
             shifter += shifter;
@@ -101,4 +107,12 @@ public class Vigenere {
         return index;
     }
 
+    private String validateKey(String originalKey) {
+        StringBuilder sb = new StringBuilder();
+        for(char c : originalKey.toCharArray()) {
+            if(indexOf(c) > -1)
+                sb.append(c);
+        }
+        return sb.toString();
+    }
 }

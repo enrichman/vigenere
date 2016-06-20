@@ -71,4 +71,30 @@ public class VigenereTest extends TestCase {
         assertEquals(plaintext, decrypted);
     }
 
+    public void testEncryptDecryptWithWrongKey() {
+        String key = "MyPrivateKey";
+        String plaintext = "HELLO";
+
+        Vigenere vigenere = new Vigenere(Alphabet.NUMERIC, Alphabet.UPPER_CASE);
+
+        String encrypted = vigenere.encrypt(plaintext, key);
+        String decrypted = vigenere.decrypt(encrypted, key);
+
+        assertNotSame(plaintext, encrypted);
+        assertEquals(plaintext, decrypted);
+    }
+
+    public void testEncryptDecryptWithEmptyKey() {
+        String key = "";
+        String plaintext = "HELLO";
+
+        Vigenere vigenere = new Vigenere(Alphabet.NUMERIC, Alphabet.UPPER_CASE);
+
+        String encrypted = vigenere.encrypt(plaintext, key);
+        String decrypted = vigenere.decrypt(encrypted, key);
+
+        assertEquals(plaintext, encrypted);
+        assertEquals(plaintext, decrypted);
+    }
+
 }
