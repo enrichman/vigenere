@@ -36,7 +36,7 @@ public class Vigenere {
     public String encrypt(String plaintext, String key, int saltSize) {
         String validKey = validateKey(key);
 
-        if(plaintext == null || plaintext.length() == 0 || validKey.length() == 0) {
+        if(plaintext == null || plaintext.length() == 0) {
             return "";
         }
 
@@ -61,7 +61,7 @@ public class Vigenere {
     public String decrypt(String encrypted, String key, int saltSize) {
         String validKey = validateKey(key);
 
-        if(encrypted == null || encrypted.length() == 0 || validKey.length() == 0) {
+        if(encrypted == null || encrypted.length() == 0) {
             return "";
         }
 
